@@ -13,7 +13,7 @@ Simple project that consumes from a kafka topic some records (Animes) and regist
 * Kafka
 * Mysql
 * Docker
-* Maven 3.8.1
+* Maven 3.6.x+
 * Java 17
 
 Obs: kafka and mysql 
