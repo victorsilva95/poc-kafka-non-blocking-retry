@@ -21,48 +21,44 @@ are present in the docker-compose file shipped in the project
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+1. Clone project from repo:
+```
+git clone git@github.com:victorsilva95/poc-kafka-non-blocking-retry.git
+```
+2. Execute clean and package command from maven to check if the project is working:
+```
+mvn clean compile
+```
+
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+* Before running the application, 
+you need to run a script to upload the external 
+dependencies (kafka, mysql) and also create the topic 
+and publish some events in it, all this is 
+encapsulated in the script called 
+**start-dependencies.sh**.
 ```
-code blocks for commands
+1. cd scripts
+2. ./start-dependencies.sh
 ```
-
-## Help
-
-Any advise for common problems or issues.
+* After it is finished, it will provide a 
+mysql database on port 3306, and a kafka broker 
+with 4 records, 2 of which are events 
+that will enter the retry queue.
+* Now at the project root let's generate the project jar and let's run it
 ```
-command to run if program contains helper info
+1. mvn clean install
+2. java -jar target/poc-kafka-non-blocking-retry-0.0.1.jar
 ```
+* After the execution in the mysql database in the anime table there must be three animes registered and in the anime_dlt table there must be an anime registered after having four retries.
 
-## Authors
-
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
 
 ## Version History
 
 * 0.2
     * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
+    * Unit Tests and Integration tests
 * 0.1
     * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)

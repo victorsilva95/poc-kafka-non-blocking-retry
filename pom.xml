@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.github.victorsilva95</groupId>
 	<artifactId>poc-kafka-non-blocking-retry</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>poc-kafka-non-blocking-retry</name>
 	<description>Demo project for non blocking retry</description>
 	<properties>
