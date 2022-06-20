@@ -45,7 +45,7 @@ encapsulated in the script called
 ```
 * After it is finished, it will provide a 
 mysql database on port 3306, and a kafka broker 
-with 4 records, 2 of which are events 
+with 4 records, 1 of which are events 
 that will enter the retry queue.
 * Now at the project root let's generate the project jar and let's run it
 ```
