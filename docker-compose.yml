@@ -1,0 +1,49 @@
+version: '2.4'
+services:
+
+  zookeeper:
+    image: debezium/zookeeper
+    container_name: anime-zkp
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: debezium/kafka
+    container_name: anime-kafka
+    environment:
+      ZOOKEEPER_CONNECT: zookeeper:2181
+    ports:
+      - "9092:9092"
+    depends_on:
+      zookeeper:
+        condition: service_started
+
+  mysql:
+    image: mysql:5.6.37
+    container_name: anime-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "anime"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+
+  kafkacat-bulk-seed-topics:
+    image: confluentinc/cp-kafkacat
+    container_name: kafkacat
+    depends_on:
+      kafka:
+        condition: service_started
+    command: 
+      - bash 
+      - -c 
+      - |
+        sed -E 's/#.*//; /^[[:space:]]*$$/d' /tmp/entries.txt >> /tmp/messages
+
+        kafkacat -P -b kafka:9092 -t anime -K, -l /tmp/messages
+    volumes:
+      - ./scripts/entries.md:/tmp/entries.txt
