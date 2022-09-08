@@ -23,7 +23,7 @@ are present in the docker-compose file shipped in the project
 
 1. Clone project from repo:
 ```
-git clone git@github.com:victorsilva95/poc-kafka-non-blocking-retry.git
+git clone https://github.com/victorsilva95/poc-kafka-non-blocking-retry.git
 ```
 2. Execute clean and package command from maven to check if the project is working:
 ```
